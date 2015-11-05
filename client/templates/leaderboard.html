@@ -1,0 +1,8 @@
+<template name="leaderboard">
+  <div class="row">
+    {{>reactiveTable collection=cardTotals settings=cardsSettings showFilter=false}}
+  </div>
+  <div class="row">
+    {{>reactiveTable collection=playerTotals settings=totalsSettings showFilter=false}}
+  </div>
+</template>

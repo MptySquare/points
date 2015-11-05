@@ -1,0 +1,106 @@
+<template name="home">
+  <ul class="tabs">
+    <li class="tab"><a href="#enterTasks">Tasks</a></li>
+    <li class="tab"><a href="#pointsList">Points</a></li>
+  </ul>
+
+  <div class="section" id="enterTasks">
+    {{> enterTasks}}
+  </div>
+
+  <div class="section" id="pointsList">
+    {{> listPoints}}
+  </div>
+</template>
+
+<template name="listPoints">
+  <div class="row">
+    {{> reactiveTable collection=points settings=tableSettings showFilter=false}}
+  </div>
+  <div id="editPoint" class="modal">
+    <div class="modal-content">
+      {{> editPointForm}}
+    </div>
+  </div>
+</template>
+
+<template name="editPointForm">
+  <h5>Edit {{taskName}}</h5>
+  <div class="section row">
+    <form>
+      <div class="input-field col s4">
+        <input class="field" id="date" type="date" value="{{ptdate}}" />
+        <label for="date" class="active">Date</label>
+      </div>
+      <div class="input-field col s4">
+        <input class="field" id="time" type="time" step="1" value="{{pttime}}" />
+        <label for="date" class="active">Time</label>
+      </div> 
+      <div class="input-field col s4">
+        <input class="field" id="ptval" type="number" step="any" value="{{ptval}}"/>
+        <label for="ptval" class="active">Points</label>
+      </div>
+      <input type="submit" class="hidden" />
+    </form>
+  <button id="deletePt" class="btn btn-lg red">Delete</button>
+  </div>
+</template>
+
+<template name="pointListTask">
+  <a class="modal-trigger" id="{{_id}}" href="#editPoint">{{task}}</a>
+</template>
+
+<template name="enterTasks">
+<!--
+- See Archive button
+      <label class="hide-completed">
+        <input type="checkbox" checked="{{hideCompleted}}" />
+        Hide Completed Tasks
+      </label>
+-->
+  {{#if currentUser}}
+    <form class="new-task">
+      <div class="input-field">
+        <input type="text" id="newtask" name="text" />
+        <label for="newtask">Enter a new task</label>
+      </div>
+    </form>
+    <ul id="tasks" class="collection">
+      {{#each tasks}}
+        {{> task}}
+      {{/each}}
+    </ul>
+  {{/if}}
+</template>
+
+<template name="task">
+  <li class="row collection-item {{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
+    <!--<input type="checkbox" checked="{{checked}}" class="toggle-checked" />-->
+    <form class="task-form">
+      <div class="col s2">
+        <a class="add-point btn-floating btn-small waves-effect waves-light">
+          <i class="material-icons">add</i>
+        </a>
+      </div>
+      <div class="col s8">
+        <input type="text" class="task text" id="taskName" value="{{text}}" />
+      </div>
+      <div class="col s2">
+        <a class="deleteTask right prefix btn-floating btn-small waves-effect waves-light right">
+          <i class="material-icons">delete</i>
+        </a>
+      </div>
+      <div class="row hide details">
+        <div class="input-field col s10">
+          <label for="description" class="active">Description</label>
+          <input type="text" class="task" id='description' placeholder="Enter description here" value="{{description}}" />
+        </div>
+        <div class="input-field col s2">
+          <label for="id" class="active">Points</label>
+          <input type="number" step="any" class="task" id="points" value="{{points}}" />
+        </div>
+        <input type="submit" class="hidden" />
+      </div>
+    </form>
+  </li>
+</template>

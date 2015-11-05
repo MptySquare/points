@@ -1,0 +1,26 @@
+<template name="appBody">
+  <nav role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="{{ pathFor 'home' }}" class="brand-logo">Points Game {{#if currentUser}}({{totalPoints}}){{/if}}</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="{{ pathFor 'leaderboard' }}">Leaderboard</a></li>
+        <li><a href="{{ pathFor 'd3' }}">Dashboard</a></li>
+        <li><a href="{{ pathFor 'pts' }}">Points</a></li>
+        <li>{{> atNavButton}}</li>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+        <li><a href="{{ pathFor 'home' }}">Tasks</a></li>
+        <li><a href="{{ pathFor 'd3' }}">Dashboard</a></li>
+        <li><a href="{{ pathFor 'pts' }}">Points</a></li>
+        <li><a href="{{ pathFor 'leaderboard' }}">Leaderboard</a></li>
+        <li>{{> atNavButton}}</li>
+      </ul>
+    </div>
+  </nav>
+  <div class="section container">
+
+    {{> yield}}
+
+  </div>
+</template>
