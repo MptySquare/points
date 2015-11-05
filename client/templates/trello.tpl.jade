@@ -1,0 +1,14 @@
+.row
+  .col.s12.m6.l4
+    .card.small
+      .card-image.center
+        h1.blue-text #{timeSpentInDay}
+      .card-content.center
+        p.cart-title.activator Points spent over last 24 hrs
+          i.material-icons.right more_vert
+      .card-reveal
+        span.card-title.grey-text.text-darken-4 Details 
+          i.material-icons.right close
+        +reactiveTable(collection=cardTotals settings=ptsRevealSettings showFilter=false)
+.row
+  +reactiveTable(collection=cardTotals settings=cardsSettings showFilter=false)

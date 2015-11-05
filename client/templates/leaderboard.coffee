@@ -1,32 +1,4 @@
 Template.leaderboard.helpers(
-    cardTotals: ()->
-      actions = []
-      cards = Trello.find().map( (card)->
-        for action in card.actions
-          if action.type is "commentCard" and /plus/.test(action.data.text)
-            action.data.pt_s = action.data.text.split(' ')[1].split('/')[0]
-            actions.push action
-      )
-
-      console.log actions
-      return actions
-      
-
-    cardsSettings: ()->
-      return fields: [
-          key: 'data.pt_s'
-          label: 'points'
-         ,
-          key: 'date'
-          label: 'date'
-         ,
-          key: 'data.text'
-          label: 'comment'
-         ,
-          key: 'data.card.name'
-          label: 'card'
-        ]
-
     playerTotals: ()->
       players = {}
       assignPoints = (player, pt)->
